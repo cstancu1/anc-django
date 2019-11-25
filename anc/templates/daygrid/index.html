@@ -1,0 +1,20 @@
+<script>       
+var locList ={{ locations|safe}};
+{%if events%}var eventList = {{events|safe}};{%endif%}
+</script>
+
+{% include 'daygrid/header.html' %}
+{% include 'daygrid/top.html' %}
+<body class="main">
+    <div id="index-top">
+        <a id="back-button" style="color:white; margin-left:30px;" onclick=backbutton() class="btn btn-danger invisible" style="margin-left:30px;">Inapoi</a>
+        <div id="top-instruction"></div>
+    </div>
+
+    <div class="row d-flex justify-content-center" id="location-event">
+
+</div>
+
+    
+</body>
+

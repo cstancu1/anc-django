@@ -1,0 +1,48 @@
+{% extends 'admin/change_list.html' %} 
+{% block object-tools %}
+
+{{ block.super }}
+
+<form id = "unlock-days-form" method = "POST" action = "unlock/">
+
+    {% csrf_token %}
+    <b>Deblocare zile:</b>  <br>
+    <label for="start_date">De la data de:</label>
+    <input type="date"  name="start_date" class="vTextField" id = "start_date">
+    
+    <label for="start_date">Pana la data de:</label>
+    <input type="date" name="end_date" class="vTextField" id = "end_date">
+
+<br><br>
+    <label for="event">Articole:</label>
+    <select name="events" class="vTextField" id = "event" multiple>
+    {% for event in events %}
+        <option value="{{ event.id }}">{% if event.is_lawyer == True %}[AV]{% endif %}{{event.name}} in {{event.location.name}}</option>
+    {% endfor %}
+    </select>
+
+    <label for="max_num">Programari/zi:</label>
+    <input type="number" name="max_num" class="vTextField" id = "max_num">
+
+    <label for="weekdays">Zilele saptamanii:</label>
+    <select name="weekdays" class="vTextField" id = "weekdays" multiple>
+        <option value = '0'> Luni </option>
+        <option value = '1'> Marti </option>
+        <option value = '2'> Miercuri </option>
+        <option value = '3'> Joi </option>
+        <option value = '4'> Vineri </option>
+        <option value = '5'> Sambata </option>
+        <option value = '6'> Duminica </option>
+    </select>
+
+    <button type="submit" class="button">Deblocare</button>
+  
+    {% if message %}
+    <ul class="messagelist">
+        <li class="success">{{ message }}</li>
+    </ul>
+    {% endif %}
+    <br><br>
+</form>
+
+{% endblock object-tools %}
