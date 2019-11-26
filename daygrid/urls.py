@@ -22,5 +22,5 @@ admin.site.site_title = 'Autoritatea Nationala pentru Cetatenie'
 
 urlpatterns = [
     path('', views.main, name='main'),
-    path('/getev', views.get_events, name = 'get_events')
+    path('getev', views.get_events, name = 'get_events')
 ]

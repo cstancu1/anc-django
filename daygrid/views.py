@@ -2,9 +2,10 @@ from django.shortcuts import render
 from bookings.models import Booking, Location, Event
 import json
 from django.core import serializers
+from datetime import date
 
 def main(request):
-    events = Event.objects.all()
+    events = Event.objects.filter(last_date__gt = date.today())
     locations = Location.objects.all()
     locations_json = []
     events_json = []
@@ -17,7 +18,10 @@ def main(request):
     for event in events:
         temp_dict = {}
         temp_dict['name'] = event.name
-        temp_dict['details'] = event.details
+        if event.details != None:
+            temp_dict['details'] = event.details
+        else:
+            temp_dict['details'] = 'lipsa descriere'
         if event.is_lawyer == False:
             temp_dict['is_lawyer'] = 'false' 
         else:

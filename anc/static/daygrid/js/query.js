@@ -2,19 +2,23 @@
 
           var eventsFiltered = []
           locationString = div.target.id;
-          eventsFiltered=eventList.filter(function(event){
-            return event.location==locationString;
-          })
-          if(eventsFiltered.length>0){
-            $(".loc-box").fadeOut("fast");
-
-            btn = document.getElementById("back-button");
-            btn.classList.toggle("invisible");
-            elements = document.getElementsByClassName("loc-box");
-            generateEventsPage(eventsFiltered);
+          if(eventList != false){
+            eventsFiltered=eventList.filter(function(event){
+              return event.location==locationString;
+            })
+            if(eventsFiltered.length>0){
+              $(".loc-box").fadeOut("fast");
+  
+              btn = document.getElementById("back-button");
+              btn.classList.toggle("invisible");
+              elements = document.getElementsByClassName("loc-box");
+              generateEventsPage(eventsFiltered);
+            }
+            else{alert("Ne pare rau. In acest moment nu se poate face programare pentru locatia selectata.")}
           }
           else{alert("Ne pare rau. In acest moment nu se poate face programare pentru locatia selectata.")}
-        }
+          }
+          
           
         function generateEventsPage(eventsFiltered){
           $(".loc-box").fadeOut();
@@ -24,7 +28,16 @@
             var article = eventsFiltered[ev];
             var newDiv = document.createElement('div');
             newDiv.id = ev;
-            newDiv.classList=["location-elem col-sm-3 border border-secondary rounded shadow ev-box"];
+            if(article.is_lawyer=='false'){
+              newDiv.classList=["location-elem col-sm-3 border border-secondary rounded shadow ev-box"];
+            }
+            else{
+              lawyerParagraph = document.createElement('p');
+              lawyerParagraph.className="lawyerparagraph";
+              lawyerParagraph.innerHTML="FORMULAR DESTINAT EXCLUSIV AVOCATILOR";
+              newDiv.appendChild(lawyerParagraph);
+              newDiv.classList=["location-elem-lawyer col-sm-3 border 1 border-danger rounded shadow ev-box"];
+            }
             newDescription=document.createElement('div');
             newDescription.className="location-details";
             newDescription.innerHTML=article.details;

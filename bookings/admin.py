@@ -3,7 +3,7 @@ from bookings.models import Location, Event, Day, Booking
 from django.urls import path
 from django.http import HttpResponseRedirect
 from django.contrib import messages
-from datetime import date
+from datetime import date, timedelta
 
 
 class EventAdmin(admin.ModelAdmin):
@@ -50,13 +50,25 @@ class DayAdmin(admin.ModelAdmin):
             event = Event.objects.get(id = event)
             for day in days:
                 try:
-                    d = Day(date = day, max_bookings = int(max_num), 
-                    total_bookings = 0, location = event.location, 
-                    event = event)
-                    d.save()
+                    #####CHECK IF DAY EXISTS:
+                    qs = Day.objects.filter(date = day, event = event)
+                    if qs.exists():
+                       pass 
+                    else:
+                        d = Day(date = day, max_bookings = int(max_num), 
+                        total_bookings = 0, location = event.location, 
+                        event = event)
+                        d.save()
                 except:
                     messages.error(request, "Eroare la deblocarea zilelor selectate!")
                     return HttpResponseRedirect("../")
+            Event.objects.filter(id = event.id).update(last_date=end_date)
+
+        #!!!!!!!!!!!!!!
+        #DELETE OLDER DAYS
+        old_days = Day.objects.filter(date__lt=date.today()-timedelta(days=1))
+        for old_day in old_days:
+            old_day.delete()
 
         messages.success(request, "Perioda {}-{} a fost deblocata cu succes".format(start_date, end_date))
         return HttpResponseRedirect("../")

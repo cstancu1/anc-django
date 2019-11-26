@@ -1,8 +1,3 @@
-<script>       
-var locList ={{ locations|safe}};
-{%if events%}var eventList = {{events|safe}};{%endif%}
-</script>
-
 {% include 'daygrid/header.html' %}
 {% include 'daygrid/top.html' %}
 <body class="main">
@@ -18,3 +13,10 @@ var locList ={{ locations|safe}};
     
 </body>
 
+<script>       
+    var locList ={{ locations|safe}};
+    {%if events%}var eventList = {{events|safe}};
+    {% else %}
+    var eventList = false;
+    {%endif%}
+    </script>

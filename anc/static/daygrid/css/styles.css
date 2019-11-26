@@ -55,6 +55,17 @@
     background-color:white;
 }
 
+.location-elem-lawyer{
+    text-align:center;
+    margin-left:20px;
+    margin-right: 20px;
+    margin-bottom:40px;
+    padding-top:20px;
+    padding-bottom:30px;
+    background-color:white;
+    
+}
+
 .location-details{
     margin-top:10px;
     font-size: 20px;
@@ -63,4 +74,8 @@
 
 .location-title{
     font-size: 25px;
+}
+
+.lawyerparagraph{
+    color:orangered;
 }
