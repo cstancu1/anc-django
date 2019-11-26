@@ -79,3 +79,18 @@
 .lawyerparagraph{
     color:orangered;
 }
+
+#top-instruction{
+    color:whitesmoke;
+    font-size: 20px;
+}
+
+#back-button{
+    color:white;
+    margin-left:30px;
+    margin-right:60px;
+}
+
+#index-top{
+    margin-top:20px;
+}

@@ -12,7 +12,8 @@
               btn = document.getElementById("back-button");
               btn.classList.toggle("invisible");
               elements = document.getElementsByClassName("loc-box");
-              generateEventsPage(eventsFiltered);
+              setTimeout(function(){
+                generateEventsPage(eventsFiltered)}, 300);  
             }
             else{alert("Ne pare rau. In acest moment nu se poate face programare pentru locatia selectata.")}
           }
@@ -21,8 +22,6 @@
           
           
         function generateEventsPage(eventsFiltered){
-          $(".loc-box").fadeOut();
-
           var mainDiv = document.getElementById("location-event");
           for(var ev in eventsFiltered){
             var article = eventsFiltered[ev];
@@ -53,15 +52,19 @@
             newDiv.appendChild(newDescription);
             newDiv.appendChild(button);
             mainDiv.appendChild(newDiv);
+            instructionTop = document.getElementById("top-instruction");
+              instructionTop.innerHTML="Selectati <b>articolul</b> in baza caruia se va depune dosarul."
           }
         }
 
         function backbutton(){
           $(".ev-box").fadeOut("fast");
-          $(".loc-box").fadeIn();
-          btn = document.getElementById("back-button");
-            btn.classList.toggle("invisible");
-            
+          setTimeout(function(){
+            $(".loc-box").fadeIn()}, 300);  
+            btn = document.getElementById("back-button");
+          btn.classList.toggle("invisible");
+          instructionTop = document.getElementById("top-instruction");
+          instructionTop.innerHTML="Selectati locatia dorita pentru efectuarea programarii."
         }
 
         document.addEventListener('DOMContentLoaded', (event) => {
@@ -91,6 +94,7 @@
               newDiv.appendChild(newDescription);
               newDiv.appendChild(button);
               mainDiv.appendChild(newDiv);
-              
+              instructionTop = document.getElementById("top-instruction");
+              instructionTop.innerHTML="Selectati <b>locatia</b> dorita pentru efectuarea programarii."
             }
           }
