@@ -80,9 +80,9 @@ WSGI_APPLICATION = 'anc.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'cetatenie',
-        'USER' : 'cetatenie',
-        'PASSWORD' : 'cetatenie22',
+        'NAME': '',
+        'USER' : '',
+        'PASSWORD' : '',
         'HOST' : 'localhost',
         'PORT' : '5432'
     }
